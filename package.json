@@ -1,6 +1,6 @@
 {
   "name": "@daniele-rolli/capacitor-spotsearch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Capacitor plugin that indexes content into iOS Spotlight",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -8,8 +8,7 @@
   "unpkg": "dist/plugin.js",
   "files": [
     "dist/",
-    "ios/Sources",
-    "ios/Tests",
+    "ios/",
     "Package.swift",
     "DanieleRolliCapacitorSpotsearch.podspec"
   ],
