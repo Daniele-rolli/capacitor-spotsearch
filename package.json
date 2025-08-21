@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com.git"
+    "url": "https://github.com/Daniele-rolli/capacitor-spotsearch"
   },
   "bugs": {
     "url": "https://github.com/issues"
