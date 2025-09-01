@@ -22,6 +22,7 @@ export interface DeleteDomainOptions {
 }
 
 export interface SpotSearchPlugin {
+  enableIndexing(options: { enabled: boolean }): Promise<void>;
   indexItems(options: IndexItemsOptions): Promise<void>;
   deleteItems(options: DeleteItemsOptions): Promise<void>;
   deleteDomain(options: DeleteDomainOptions): Promise<void>;

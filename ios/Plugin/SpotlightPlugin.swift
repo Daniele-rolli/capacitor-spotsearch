@@ -4,8 +4,20 @@ import UniformTypeIdentifiers
 
 @objc(SpotSearch)
 public class SpotSearch: CAPPlugin {
+  private var indexingEnabled = false
+
+  @objc func enableIndexing(_ call: CAPPluginCall) {
+    let enabled = call.getBool("enabled") ?? false
+    indexingEnabled = enabled
+    call.resolve()
+  }
 
   @objc func indexItems(_ call: CAPPluginCall) {
+    guard indexingEnabled else {
+      call.resolve()
+      return
+    }
+
     guard let items = call.getArray("items", Any.self) as? [[String: Any]] else {
       call.reject("Missing items"); return
     }
@@ -37,6 +49,11 @@ public class SpotSearch: CAPPlugin {
   }
 
   @objc func deleteItems(_ call: CAPPluginCall) {
+    guard indexingEnabled else {
+      call.resolve()
+      return
+    }
+
     let ids = call.getArray("ids", String.self) ?? []
     CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ids) { e in
       if let e = e { call.reject(e.localizedDescription) } else { call.resolve() }
@@ -44,6 +61,11 @@ public class SpotSearch: CAPPlugin {
   }
 
   @objc func deleteDomain(_ call: CAPPluginCall) {
+    guard indexingEnabled else {
+      call.resolve()
+      return
+    }
+
     guard let domain = call.getString("domain") else { call.reject("Missing domain"); return }
     CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: [domain]) { e in
       if let e = e { call.reject(e.localizedDescription) } else { call.resolve() }

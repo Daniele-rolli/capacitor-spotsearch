@@ -11,8 +11,7 @@ export class SpotSearchWeb extends WebPlugin implements SpotSearchPlugin {
   private mem = new Map<string, any>();
   private indexingEnabled = false; // <- opt-in flag
 
-  // Method for developer or user settings to enable indexing
-  async enableIndexing(enabled: boolean): Promise<void> {
+  async enableIndexing({ enabled }: { enabled: boolean }): Promise<void> {
     this.indexingEnabled = enabled;
   }
 
